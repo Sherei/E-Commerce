@@ -1,6 +1,35 @@
-*{
-    margin: 0px; padding: 0px; box-sizing: border-box;
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
 }
-h1,h2,h3,h4,h5,h6,p{
-    font-family: 'Montserrat', sans-serif;;
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    font-family: 'Montserrat', sans-serif;
+    ;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+.main_body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+.error {
+    font-family: 'Montserrat', sans-serif;
+    color: red;
+    letter-spacing: 0.1rem;
+    margin-top: 0.5rem;
 }
