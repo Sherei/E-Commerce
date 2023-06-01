@@ -45,7 +45,7 @@
     }
 }
 .services_card{
-    width: 90%;
+    width: 80%;
     height: 250px;
     /* border: 1px solid red; */
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -94,7 +94,7 @@
 }
 .price{
     color: #6254F3;
-    font-weight: 600;
+    font-weight: 500;
 }
 @media screen and (max-width:368px) {
         .service_row1{

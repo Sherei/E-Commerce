@@ -41,9 +41,9 @@ export const Services = () => {
                   <div className='slide_overlay'></div>
                   <button className='service_btn'>{data.category}</button>
                 </div>
-                <div className='d-flex justify-content-between mt-2 px-2'>
+                <div className='d-flex justify-content-between mt-3 px-2'>
                   <div><p>{data.title}</p></div>
-                  <div><p className='price'>{data.price}</p></div>
+                  <div><p className='price'>Rs. {data.price}</p></div>
                 </div>
               </div>
             </div>
