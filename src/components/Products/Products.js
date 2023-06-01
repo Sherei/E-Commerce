@@ -6,8 +6,14 @@ export const Products = () => {
   let [price, setPrice] = useState("200000");
   let [sortOrder, setSortOrder] = useState("");
 
-  const handleInput = (e) => {
+  let handleInput = (e) => {
     setPrice(e.target.value);
+  }
+
+  function Filterclear() {
+    setPrice("200000")
+    setSortOrder("")
+    console.log("hello")
   }
 
   let data = [
@@ -84,12 +90,14 @@ export const Products = () => {
       price: "7500"
     },
   ]
-  if (sortOrder === "desc") {
+  if (sortOrder === "asc") {
+    data.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+  } else if (sortOrder === "desc") {
     data.sort((a, b) => parseInt(b.price) - parseInt(a.price));
   } else {
-    data.sort((a, b) => parseInt(a.price) - parseInt(b.price));
+    data.sort();
   }
-  
+
   return <>
     <div className='container-fluid px-4'>
       <div className='row my-4'>
@@ -116,13 +124,17 @@ export const Products = () => {
               onChange={handleInput}
             />
           </div>
-          <div className=''>
-            <button className='clear_filter text-uppercase'>Clear Filters</button>
-          </div>
+          <button type="button" className="btn btn-danger text-uppercase" onClick={(Filterclear)}>Clear Filter</button>
+
         </div>
-        <div className='col-lg-10 col-md-10 col-sm-10  product_col2'>
-          <div className='row align-items-center'>
-            <div className='col-lg-4 col-md-4 col-sm-4 d-flex gap-2'>
+
+        {/* /////////////////////////////////////////////////////////////////////////////// */}
+
+
+
+        <div className='col-lg-10 col-md-10 col-sm-10 px-3   mb-5 product_col2'>
+          <div className='row'>
+            <div className='col-lg-4 col-md-4 col-sm-4 d-flex gap-2 '>
               <div className='grid_icon'>
                 <BsFillGridFill />
               </div>
@@ -130,14 +142,17 @@ export const Products = () => {
                 <BsListStars />
               </div>
             </div>
-            <div className='col-lg-4 col-md-4 col-sm-4' >
-              <p className='products_number'>12 Products</p>
+            <div className='col-lg-4 col-md-4 col-sm-4 ' >
+              <div className='products_number d-flex justify-content-center' style={{ fontWeight: "600" }}>
+                <p>12 Products</p>
+              </div>
             </div>
-            <div className='col-lg-4 col-sm-4'>
+            <div className='col-lg-4 col-sm-4 '>
               <div className='d-flex justify-content-end select'>
                 <select name="" id="" onChange={(e) => setSortOrder(e.target.value)}>
-                  <option value="">Price (Lowest)</option>
+                  <option value="">All</option>
                   <option value="desc">Price (Highest)</option>
+                  <option value="asc">Price (Lowest)</option>
                 </select>
               </div>
             </div>

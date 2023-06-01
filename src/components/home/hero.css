@@ -26,6 +26,7 @@
     color: white;
     border: none;
     font-size: 1.2rem;
+    border-radius: 5px;
     /* font-weight: 400; */
     z-index: 1;
     position: relative;
@@ -33,6 +34,7 @@
 .home_row1 button:hover{
     color: white;
     cursor: pointer;
+    
     transform: scale(1.03);
 }
 .home_row1 button:hover::before{
@@ -46,6 +48,8 @@
     width: 100%;
     height: 100%;
     background-color: black;
+    border-radius: 5px;
+
     z-index: -1;
     transform-origin: 0 0;
     transform: scaleX(0);

@@ -35,9 +35,10 @@ export const Signup = () => {
                 City
                 <input type="text" />
               </div>
-              <button onClick={()=>{
+              <button className='mt-3' onClick={()=>{
                 move('/login')
               }}>Sign Up</button>
+              
               <p>Already have an acount ?<span className='signin' onClick={() => {
                 move('/login')
               }}> Sign In</span></p>

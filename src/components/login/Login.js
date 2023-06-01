@@ -30,9 +30,10 @@ export const Login = () => {
                 Password
                 <input type="text" />
               </div>
-              <button onClick={()=>{
-                move("/signup")
-              }}>Sign Up</button>
+              <button className='mt-3' onClick={()=>{
+                move('/product')
+              }}>Login</button>
+              
               <p>I don't have an acount ?<span onClick={()=>{
                 move("/signup")
               }}> Sign up</span></p>

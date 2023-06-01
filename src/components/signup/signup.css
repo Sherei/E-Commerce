@@ -70,14 +70,20 @@
 
 .signup-form form button {
     margin-top: 2rem;
-    width: 130px;
-    height: 40px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0.4rem 1.5rem;
     background-color: #6254F3;
     border: none;
-    border-radius: 50px;
+    border-radius: 5px;
     color: white;
 }
-
+.signup-form form button:hover{
+    background-color: #A2A0FF;
+    color: black;
+    cursor: pointer;
+    transform: scale(1.03);
+}
 .signup-form form input {
     padding-left: 1rem;
     color: white;
