@@ -2,16 +2,18 @@
     background-color: #F6F8FA !important;
 
 }
-
-
-
-.navbar-brand {
-    font-family: 'Rubik Puddles', cursive;
-    margin-left: -50px;
-    color: #3571fd !important;
+.logo1{
+    font-family: monospace;
+    background-color: black;
+    color: white;
+    padding: 0.2rem 1rem;
+}
+.logo2{
+    font-family: monospace;
+    color: black;
+    padding: 0.2rem .1rem;
 
 }
-
 .navbar-nav {
     margin-right: -4rem !important;
 }

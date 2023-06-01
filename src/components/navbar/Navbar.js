@@ -1,6 +1,7 @@
 import React from 'react';
 import "./navbar.css";
 import { FiShoppingCart } from "react-icons/fi";
+import { FaCheck } from "react-icons/fa";
 
 export const Navbar = () => {
   
@@ -10,7 +11,7 @@ export const Navbar = () => {
       <nav className="navbar sticky-top navbar-expand-lg bg-dark">
         <div className="container">
           <a className="navbar-brand" href="#">
-            BUyRight
+           <span className='logo1'>Buy</span><span className='logo2'><FaCheck/></span>
           </a>
           <button
             className="navbar-toggler"
