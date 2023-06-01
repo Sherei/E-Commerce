@@ -49,10 +49,7 @@
     height: 2rem;
     border: 1px solid black;
 }
-.product_col2{
-    /* height: 200vh;
-    overflow: auto; */
-}
+
 .product_card{
     width: 90%;
     height: 200px;
