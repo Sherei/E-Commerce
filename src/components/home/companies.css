@@ -1,0 +1,23 @@
+.company_container {
+    min-height: 400px;
+    background-color: #F6F8FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-icon-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.company_icon {
+    /* border: 1px solid black; */
+    font-size: 6rem;
+}
+@media screen and (min-width:225px) and (max-width:768px) {
+        .company_container{
+            display: none;
+        }
+}

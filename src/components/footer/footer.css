@@ -1,0 +1,128 @@
+.footer {
+    min-height: 500px;
+    background-color: #121031;
+    position: relative;
+    margin-top: 5rem;
+}
+
+.top-footer {
+    width: 650px;
+    position: absolute;
+    height: 150px;
+    border-radius: 10px;
+    background-color: aliceblue;
+    top: -70px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 100;
+
+}
+
+.top-footer button {
+    color: white;
+    width: 150px;
+    padding: .5rem 2rem;
+    border: none;
+    background-color: #6254F3;
+}
+
+.mid-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    min-height: 300px;
+    text-align: center;
+    /* background-color: #31101d; */
+}
+
+
+.mid-footer form {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 1rem;
+
+}
+
+.mid-footer form input {
+    width: 15rem;
+    padding-left: 1rem;
+    height: 2.5rem;
+    border: none;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+.mid-footer form button {
+    width: 150px;
+    padding: .5rem 2rem;
+    border: none;
+    color: white;
+    background-color: #6254F3;
+}
+
+.footer-icon {
+    display: flex;
+    gap: 1rem;
+}
+
+.footer-icon span {
+    font-size: 30px !important;
+    border: 1px solid white;
+    border-radius: 50%;
+    text-align: center;
+    padding: 0rem .5rem .4rem .5rem;
+
+}
+.hr{
+    color: white;
+    margin-top: 60px;
+}
+.end-footer{
+    color: white;
+}
+
+
+@media (max-width:990px) {
+    .mid-footer {
+        min-height: 150px;
+    }
+    .top-footer {
+        display: none;
+    }
+}
+
+@media (max-width:650px) {
+    .top-footer {
+        width: 500px;
+    }
+}
+
+@media (max-width:550px) {
+    .top-footer {
+        width: 400px;
+    }
+.mid-footer form {
+    align-items: center;
+}
+}
+
+@media (max-width:450px) {
+    .top-footer {
+        width: 300px;
+        flex-direction: column;
+    }
+}
+
+@media (max-width:350px) {
+    .top-footer {
+        width: 200px;
+    }
+}

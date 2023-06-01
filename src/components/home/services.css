@@ -1,0 +1,122 @@
+.container_service{
+    min-height: 650px;
+    /* border: 1px solid red; */
+    background-color: #F6F8FA;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+.featured {
+    font-size: 2.5rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.featured::before {
+    position: absolute;
+    content: '';
+    width: 180px;
+    height: 2px;
+    left: 95px;
+    bottom: -2px;
+    transform: translate(-50%, 0);
+    background-color: blue;
+    animation: movingLines 2s infinite;
+}
+
+@keyframes movingLines {
+    0% {
+        left: 95px;
+        width: 0;
+        background-color: blue;
+    }
+
+    50% {
+        left: 95px;
+        width: 150px;
+        background-color: red;
+    }
+
+    100% {
+        left: 95px;
+        width: 0;
+        background-color: blue;
+    }
+}
+.services_card{
+    width: 90%;
+    height: 250px;
+    /* border: 1px solid red; */
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.services_card:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    transition: all linear 0.3s;
+}
+.service_card_img {
+    position: relative;
+    width: 100%;
+    height: 85%;
+    z-index: 1;
+    overflow: hidden;
+    transition: transform 0.5s ease-out;
+  }
+  .slide_overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: transform 0.5s ease-out;
+  }
+  
+  .service_card_img:hover .slide_overlay {
+    transform: translateX(100%);
+  }
+    
+.service_card_img img{
+    width: 100%;
+    height: 100%;
+}
+.service_btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background-color: white;
+    border-radius: 20px;
+    padding: 0.2rem 1rem;
+    color: blue;
+}
+.price{
+    color: #6254F3;
+    font-weight: 600;
+}
+@media screen and (max-width:368px) {
+        .service_row1{
+            padding: 15px !important;
+        }
+        .featured{
+         font-size: 1.2rem;   
+        }
+        .services_card{
+            width: 100%;
+        }
+        
+}
+@media screen and (min-width:369px) and (max-width:768px) {
+    .service_row1{
+        padding: 15px !important;
+    }
+    .featured{
+     font-size: 2.4rem;   
+    }
+    .services_card{
+        /* width: 100%; */
+    }
+    
+}

@@ -1,0 +1,105 @@
+.navbar {
+    background-color: #F6F8FA !important;
+
+}
+
+
+
+.navbar-brand {
+    font-family: 'Rubik Puddles', cursive;
+    margin-left: -50px;
+    color: #3571fd !important;
+
+}
+
+.navbar-nav {
+    margin-right: -4rem !important;
+}
+
+.navbar .navbar-brand {
+    font-size: 30px;
+}
+
+.navbar .nav-item {
+    padding: 0px 5px;
+    font-family: 'Montserrat', sans-serif !important;
+    font-style: normal;
+
+    line-height: 30px;
+    /* identical to box height */
+
+    display: flex;
+    align-items: center;
+    color: #0d1c3d !important;
+}
+
+.navbar .nav-item a {
+    color: #424242 !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    text-transform: uppercase;
+
+}
+
+.navbar .nav-item span {
+    color: #424242 !important;
+    font-weight: 500 !important;
+    font-size: 25px !important;
+    text-transform: uppercase;
+
+}
+.cart-item-count {
+    background-color: #7700ff !important; 
+    color: #ffffff !important;
+    padding: 0px 2px;
+    border-radius: 50%; 
+    /* margin-left: 4px; */
+  }
+  
+.navbar .nav-item div {
+    border-radius: 50%;
+    position: absolute !important;
+    top: 10px;
+  background-color: #007bff !important;
+  width: 20px !important;
+  height: 20px !important;
+
+}
+
+.navbar .nav-link {
+    font-size: 20px;
+    margin-left: 10px;
+}
+
+.navbar .nav-link button {
+    width: 120px;
+    height: 45px;
+    left: calc(50% - 189px/2 - 114.25px);
+    top: calc(50% - 58px/2 + 99.5px);
+    color: white;
+    background: #2E7CDF;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: all .5s;
+}
+
+.navbar .nav-link button:hover {
+    background-color: white;
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.fa-bars {
+    color: #007bff;
+    font-size: 30px;
+}
+
+@media (max-width:668px) {
+    .navbar-brand {
+        font-family: 'Rubik Puddles', cursive;
+        margin-left: 0px;
+        color: #193574 !important;
+
+    }
+}
