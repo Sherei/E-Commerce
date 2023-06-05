@@ -1,9 +1,49 @@
 import React from 'react'
-import "./login.css"
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router'
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import axios from 'axios';
+
+import "./login.css"
+
+
 export const Login = () => {
 
+  let { register, handleSubmit, reset, formState: { errors } } = useForm();
+
   let move = useNavigate()
+
+  let dispatch = useDispatch();
+
+  let Login = async (data) => {
+    try {
+      let response = await axios.post("/login", data);
+      let loginUser = response.data;
+      console.log(loginUser);
+
+      if (loginUser) {
+        localStorage.setItem('userToken', loginUser.myToken);
+       
+        dispatch({
+          type: "LOGIN_USER",
+          payload: loginUser.user,
+        });
+        if (loginUser.email === "asd@gmail.com") {
+          toast.success("Welcome Back Dear Admin");
+          move('/dashboard');
+        } else {
+          toast.success("Welcome Back");
+          move('/product');
+        }
+        reset();
+      } else {
+        toast.error("Enter valid credentials");
+      }
+    } catch (e) {
+      toast.error("Try Again later");
+    }
+  };
 
   return (
 
@@ -19,22 +59,28 @@ export const Login = () => {
             <p>Welcome Back !!!</p>
             <h2>Sign in</h2>
 
-            <form action="">
-
-
+            <form action="" onSubmit={handleSubmit(Login)}>
               <div>
                 Email
-                <input type="text" />
+                <input type="text" {...register('email', {
+                  required: true, validate: function (typedValue) {
+                    if (typedValue.match(
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+                    )) {
+                      return true;
+                    } else {
+                      return false;
+                    }
+                  }
+                })} />
               </div>
               <div>
                 Password
-                <input type="text" />
+                <input type="password" {...register('password', { required: true, })} />
               </div>
-              <button className='mt-3' onClick={()=>{
-                move('/product')
-              }}>Login</button>
-              
-              <p>I don't have an acount ?<span onClick={()=>{
+              <button className='mt-3'>Login</button>
+
+              <p>I don't have an acount ?<span onClick={() => {
                 move("/signup")
               }}> Sign up</span></p>
             </form>

@@ -3,11 +3,11 @@ import { createStore, combineReducers } from 'redux'
 const userSection = (oldData = {
     cu: {}
 }, newData) => {
-    if (newData.type == "LOGIN_USER") {
+    if (newData.type ==="LOGIN_USER") {
         oldData.cu = newData.payload;
-    } else if (newData.type == "LOGOUT_USER") {
+    } else if (newData.type === "LOGOUT_USER") {
         oldData.cu = {};
-        // localStorage.removeItem('meraToken');
+        localStorage.removeItem('userToken');
     }
     return ({ ...oldData })
 

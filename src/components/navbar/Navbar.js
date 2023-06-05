@@ -2,16 +2,29 @@ import React from 'react';
 import "./navbar.css";
 import { FiShoppingCart } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
+import { toast } from "react-toastify"
 
 export const Navbar = () => {
-  
 
+  let cu = useSelector(store => store.userSection.cu)
+  let dispatch = useDispatch()
+  let move = useNavigate()
+
+  function Logout() {
+    dispatch({
+      type: 'LOGOUT_USER'
+    });
+    toast.success("Logout");
+    move('/login');
+  }
   return (
     <div>
       <nav className="navbar sticky-top navbar-expand-lg bg-dark">
         <div className="container">
           <a className="navbar-brand" href="#">
-           <span className='logo1'>Buy</span><span className='logo2'><FaCheck/></span>
+            <span className='logo1'>Buy</span><span className='logo2'><FaCheck /></span>
           </a>
           <button
             className="navbar-toggler"
@@ -46,19 +59,51 @@ export const Navbar = () => {
                   Contact
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="login">
-                  Login
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="cart">
-                  <span>
-                    <FiShoppingCart />
-                  </span>
-                  {/* <span className="cart-item-count">0</span> */}
-                </a>
-              </li>
+              {cu.email === "asd@gmail.com" &&
+                <>
+                  <li className="nav-item" onClick={() => {
+                    move('/dashboard')
+                  }}>
+                    <a className="nav-link">
+                      Profile
+                    </a>
+                  </li>
+
+                </>
+              }
+              {cu._id === undefined &&
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="login">
+                      Login
+                    </a>
+                  </li>
+                </>
+
+              }
+              {cu._id != undefined && cu.email != "asd@gmail.com" &&
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" href="cart">
+                      <span>
+                        <FiShoppingCart />
+                      </span>
+                      {/* <span className="cart-item-count">0</span> */}
+                    </a>
+                  </li>
+
+                </>
+              }
+              {cu._id != undefined &&
+                <>
+                  <li className="nav-item">
+                    <a className="nav-link" onClick={Logout}>
+                      Logout
+                    </a>
+                  </li>
+                </>
+              }
+
             </ul>
           </div>
         </div>

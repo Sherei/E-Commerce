@@ -1,49 +1,82 @@
-.product_filter_col {
-    min-height: 100vh;
-    /* border: 1px solid red; */
-}
-
-.product_filter_col input {
-    width: 100%;
-    border: 1px solid #dddfe0;
-    border-radius: 5px;
-    height: 2rem;
-    padding-left: 0.5rem;
-}
-
-.product_filter_col input:focus {
-    outline: none;
-    padding-left: 0.5rem;
-
-}
-
-.product-heading {
-    width: fit-content;
-    font-weight: 700;
-}
-
-.active {
-    font-size: 13px;
-    width: fit-content;
-}
-
-.active:hover {
-    color: #6254F3;
-    cursor: pointer;
-    border-bottom: 1px solid #6254F3;
-    /* border-width: 40px; */
-}
-
-.clear_filter {
-    width: fit-content;
-    padding: 0.5rem 1rem;
-    color: white;
+.mic_hover{
+    background: none;
     border: none;
-    background-color: #6254F3;
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    padding: 3px;
+    border-radius:50% ;
+}
+.mic_hover:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    outline: none;
+    background-color: lightgray;
+    transition: all linear 0.3s;
+}
+.mic_hover:focus{
+    color: red;
+    outline: none;
+}
+.categories p{
+    font-size: 15px;
+    font-weight: 400;
+    color: rgb(129, 128, 128);
+}
+.categories p:hover{
+    cursor: pointer;
+    transform: scale(1.03);
+    border-bottom: 1px solid black;
+    transition: all linear 0.3s;
+}
+.product-main{
+    position: "relative";
+    box-Shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px
+}
+.product_img {
+    position: relative;
+    width: 100%; 
+    height: 175px; 
+    overflow: hidden;
+  }
+  
+  .product_img img {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .slide_overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, left 0.3s ease-in-out;
+    pointer-events: none;
+  }
+  
+  .product_img:hover .slide_overlay {
+    opacity: 1;
+    left: 0;
+  }
+  
+
+.grid_icon {
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+.grid_icon.active {
+    background-color: black;
+    color: white;
 }
 
 .grid_icon {
-    /* border: 1px solid red; */
+    cursor: pointer;
     width: fit-content;
     height: fit-content;
     padding: 0.3rem 0.8rem;
@@ -51,14 +84,118 @@
     font-size: 1rem;
 }
 
-.select select {
-    height: fit-content;
-    padding: 0.3rem 1.3rem;
-    border: 1px solid #dddfe0;
+/* /////////////////////////// */
+
+
+
+.l-services {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 5px;
 }
 
-.product_card {
-    width: 90%;
+.v-input {
+    position: relative;
+}
+
+.v-input button {
+    position: absolute;
+    right: 8px;
+    border: none;
+    padding: 3px;
+    border-radius: 50%;
+    background: none;
+
+
+}
+
+.v-input button:focus {
+   color: red;
+}
+
+.l-service_card_d h2 {
+    font-size: 25px;
+    padding-top: .5rem;
+}
+
+.l-service_card_d button {
+    text-transform: uppercase;
+    /* padding: .6rem 1rem;
+    background: none;
+    border: 2px solid #6254F3; */
+
+}
+
+.l-services-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.l-service_card_img {
+    position: relative;
+    width: 80%;
     height: 200px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    z-index: 1;
+    overflow: hidden;
+    transition: transform 0.5s ease-out;
+}
+
+.l-service_card_img img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.l-slide_overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: transform 0.5s ease-out;
+}
+
+.l-service_card_img:hover .l-slide_overlay {
+    transform: translateX(100%);
+}
+
+.l-service_card_d .desc{
+    text-align: justify;
+    color: rgb(156, 156, 156);
+}
+
+.price {
+    color: #6254F3;
+    font-weight: 500;
+}
+.range_class{
+    width: 90%;
+}
+@media only screen and (max-width: 225px) and (min-width: 990px) {
+    .main_col{
+        padding-top: 0px !important;
+        background-color: #6254F3;
+       }
+       .main-col1{ 
+        background-color: #6254F3;
+
+        padding-bottom: 0px !important;
+       }
+       .categories{
+        color: blue ;
+       }
+       .range_class{
+        width: 70%;
+       }
+}
+@media (max-width:768px){
+   .product_card{
+    width: 100%;
+   }
+   
+   /* .v-input input{
+    width: 300px;
+   } */
 }
