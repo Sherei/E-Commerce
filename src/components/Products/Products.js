@@ -3,80 +3,34 @@ import "./product.css"
 import { BsFillGridFill, BsListStars, BsFillFunnelFill } from "react-icons/bs"
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import { BsFillMicFill } from "react-icons/bs";
-// import axios from "axios"
+import axios from 'axios';
 
 
 export const Products = () => {
-  let data = [
-    {
-      title: "Iphone 14 pro max",
-      price: "7800",
-      category: "Mobiles",
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      img: "iphone15ultrateaser.png"
-    },
-    {
-      title: "Laptop Hp",
-      price: "4000",
-      category: "Laptops",
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
 
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    },
-    {
-      title: "Best Shoes",
-      price: "1500",
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-
-      category: "Clothes",
-      img: "pair-trainers.jpg"
-    },
-    {
-      title: "Laptop Hp",
-      price: "4000",
-
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      category: "Laptops",
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    },
-    {
-      title: "Laptop Hp",
-      price: "4000",
-
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      category: "Laptops",
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    }, {
-      title: "Laptop Hp",
-      price: "4000",
-
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      category: "Laptops",
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    }, {
-      title: "Laptop Hp",
-      price: "4000",
-
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      category: "Laptops",
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    }, {
-      title: "Laptop Hp",
-      price: "4000",
-
-      desc: "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-      category: "Laptops",
-      img: "photo-1460353581641-37baddab0fa2.jpg"
-    },
-
-  ]
+  const [data, setData] = useState([]);
 
   let [minPrice, setMinPrice] = useState("0")
-  let [maxPrice, setMaxPrice] = useState("10000")
+  let [maxPrice, setMaxPrice] = useState('45000');
   let [search, setSearch] = useState("")
   let [activeGrid, setActiveGrid] = useState("grid")
   let [sort, setSortOrder] = useState("")
   let [showFilter, setShowFilter] = useState(true);
+
+  
+  useEffect(() => {
+    axios.get('/product')
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching product data:', error);
+      });
+  }, []);
+
+  let maximum = data.reduce((max, item) => {
+    return item.price > max ? item.price : max;
+  }, 0);
 
   let Minvalue = (e) => {
     setMinPrice(parseInt(e.target.value))
@@ -153,12 +107,25 @@ export const Products = () => {
                 <div className='categories'>
                   <h2 className='mb-4' style={{ fontSize: '24px', fontWeight: '700' }}>Category</h2>
                   <div className='px-3'>
-                    <p>All</p>
-                    <p>Mobile</p>
-                    <p>Laptop</p>
-                    <p>Watches</p>
-                    <p>Camera</p>
-                    <p>Accessories</p>
+                    <p>
+                      All
+                    </p>
+                    <p>
+                      Mobile
+                    </p>
+                    <p>
+                      Laptop
+                    </p>
+                    <p>
+                      Watches
+                    </p>
+                    <p>
+                      Camera
+                    </p>
+                    <p>
+                      Accessories
+                    </p>
+
                   </div>
                 </div>
 
@@ -166,10 +133,10 @@ export const Products = () => {
                   <h2 className='my-4' style={{ fontSize: '24px', fontWeight: '700' }}>Price Range</h2>
                   <div className='px-3'>
                     <span>Min Value: {minPrice}</span>
-                    <input type="range" min="0" max="10000" value={minPrice} className='range_class' onChange={(Minvalue)} />
+                    <input type="range" min="0" max={maximum - 1000} value={minPrice} className='range_class' onChange={(Minvalue)} />
                     <br />
-                    <span>Min Value:{maxPrice}</span>
-                    <input type="range" min="0" max="10000" className='range_class' value={maxPrice} onChange={(Maxvalue)} />
+                    <span>Max Value:{maxPrice}</span>
+                    <input type="range" min="0" max={maximum} className='range_class' value={maxPrice} onChange={(Maxvalue)} />
                   </div>
                 </div>
                 <div className='d-flex justify-content-center'>
@@ -203,11 +170,11 @@ export const Products = () => {
                 let lowerCaseTitle = product.title.toLowerCase();
                 let lowerCaseCategory = product.category.toLowerCase();
                 let lowerCaseSearch = (search || transcript).toLowerCase();
+                
                 return (
                   productPrice >= minPrice &&
                   productPrice <= maxPrice &&
-                  (lowerCaseTitle.includes(lowerCaseSearch) ||
-                    lowerCaseCategory.includes(lowerCaseSearch))
+                  (lowerCaseTitle.includes(lowerCaseSearch))
                 );
               }).length} </b> Products</p>
 
@@ -225,18 +192,16 @@ export const Products = () => {
             {activeGrid === "grid" && data.filter((product) => {
               let productPrice = parseInt(product.price);
               let lowerCaseTitle = product.title.toLowerCase();
-              let lowerCaseCategory = product.category.toLowerCase();
               let lowerCaseSearch = (search || transcript).toLowerCase();
               return (
                 productPrice >= minPrice &&
                 productPrice <= maxPrice &&
-                (lowerCaseTitle.includes(lowerCaseSearch) ||
-                  lowerCaseCategory.includes(lowerCaseSearch))
+                (lowerCaseTitle.includes(lowerCaseSearch))
               );
             }).map((product) => {
               return <div className='col-lg-3 col-md-5 col-sm-5 col-xsm-5 px-2 py-2 min-h-75 product-main'>
                 <div className='product_img' >
-                  <img src={product.img} alt="" style={{ width: "100%", height: "100%" }} />
+                  <img src="photo-1618424181497-157f25b6ddd5.jpg" alt="" style={{ width: "100%", height: "100%" }} />
                   <div className='slide_overlay'></div>
                 </div>
                 <button className='px-2 py-1' style={{
@@ -262,13 +227,11 @@ export const Products = () => {
             {activeGrid === "list" && data.filter((product) => {
               let productPrice = parseInt(product.price);
               let lowerCaseTitle = product.title.toLowerCase();
-              let lowerCaseCategory = product.category.toLowerCase();
               let lowerCaseSearch = (search || transcript).toLowerCase();
               return (
                 productPrice >= minPrice &&
                 productPrice <= maxPrice &&
-                (lowerCaseTitle.includes(lowerCaseSearch) ||
-                  lowerCaseCategory.includes(lowerCaseSearch))
+                (lowerCaseTitle.includes(lowerCaseSearch)) 
               );
             }).map((product) => {
               return (

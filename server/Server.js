@@ -15,6 +15,7 @@ let token = require('jsonwebtoken');
 require("./model/db")
 
 let SignupUsers = require('./model/user')
+
 let Product = require('./model/product')
 
 app.post('/session-check', async (req, res) => {
@@ -61,14 +62,11 @@ app.post('/login', async (req, res) => {
         let user = await SignupUsers.findOne({ email: req.body.email, password: req.body.password })
         if (user) {
             token.sign({ tokenId: user._id }, "My user", { expiresIn: "1y" }, async (err, myToken) => {
-
                 res.json({ user, myToken })
-
             })
         } else {
             res.status(404).json({ message: "Invalid credentials" })
 
-            // res.end("Invalid Credentials");
         }
     } catch (e) {
         console.log(e);
@@ -89,9 +87,12 @@ app.post("/product", async (req, res) => {
 })
 
 app.get('/product', async(req,res)=>{
+
     try{
+        
         let newProduct= await Product.find()
         res.json(newProduct)
+
     }catch(e){
         console.log(e)
 
