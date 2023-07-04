@@ -6,9 +6,9 @@ import { Cart } from "./components/cart/Cart"
 import { Footer } from "./components/footer/Footer"
 import { Products } from "./components/Products/Products";
 import { Error } from "./components/Error/Error";
-import { Login } from "./components/login/Login"
-import { Signup } from "./components/signup/Signup"
-import Sidebar from "./components/dashboard/Sidebar"
+import { Login } from "./components/login/Login";
+import { Signup } from "./components/signup/Signup";
+import Sidebar from "./components/Dashboard/Sidebar"
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -53,7 +53,6 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
           <Route exact path="/dashboard" element={<Sidebar />}></Route>
-
         </Routes>
       </main>
       {cu.email != "asd@gmail.com" &&

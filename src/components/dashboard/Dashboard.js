@@ -1,113 +1,117 @@
-import React, { useState } from 'react';
-import {
-  FaUserAlt,
-  FaDiscourse,
-  FaServicestack,
-  FaCameraRetro,
-  FaEnvelope,
-  FaPowerOff,
-  FaSearch,
-  FaUsers
-} from 'react-icons/fa';
-import { Users } from './Users';
-import './dashboard.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router';
+import React, { useEffect, useState } from 'react';
+import { FaUsers, FaPowerOff, FaSearch, FaClipboardList, FaFirstOrder, FaFirstOrderAlt } from "react-icons/fa";
+import { MdProductionQuantityLimits } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import { Users } from "./Users"
+import { AddProduct } from "./AddProduct"
+import { Products } from "./Products"
+import { NewOrder } from "./NewOrder"
+import { Orders } from "./Orders"
+import "./dashboard.css";
 
 export const Dashboard = () => {
-  const [activeComponent, setActiveComponent] = useState('users');
-  let cu = useSelector(store => store.userSection.cu)
-  let move = useNavigate()
-  let dispatch = useDispatch()
-  const handleClick = (component) => {
-    setActiveComponent(component);
-  };
-  function Logout() {
-    dispatch({
-      type: 'LOGOUT_USER'
-    });
-    toast.success("Logout")
-    move('/login');
-  }
-  const renderComponent = () => {
-    switch (activeComponent) {
-      case 'users':
-        return <Users />;
-      
-      default:
-        return null;
-    }
-  };
 
-  return (
-    <>
-      <div className="container-fluid mb-4">
-       
-        <div className='row dash_topbar mb-4 '>
-          <div className='col-lg-6 col-md-6 col-sm-6'>
-            <input type="Search" placeholder='Search AnyThing' /> <span className='search'><FaSearch /></span>
-          </div>
+    let move = useNavigate()
 
-          <div className='col-lg-6 col-md-6 col-sm-6 d-flex topbar_detail'>
-            <div>
-             <b>Admin:</b> {cu.name}
-            </div>
-            <div className='topbar_img_box'>
-              <img src={cu.pic} alt="" />
-            </div>
-            <div className='topbar_icon' onClick={Logout}>
-              <FaPowerOff />
-            </div>
-          </div>
-        </div>
-        <div className="row dash_cont mb-4">
-          <div className="col-lg-12 col-sm-12 mb-4">
-            <h1 className="dash_heading">Dashboard</h1>
-          </div>
-          <div className="row card_Row">
-            <div
-              className="col-lg-3 col-md-5 col-sm-12 mb-4 dash_card"
-              onClick={() => handleClick('users')}
-            >
-              <div className='dash_card_box'>
-                <div className="dash_card_icon">
-                  <FaUserAlt />
+    let data = [
+        { title: "New Order", icon: <FaFirstOrderAlt />, id: "newOrder" },
+        { title: "Total Users" , desc: "40", icon: <FaUsers />, id: "users" },
+        { title: "Products", desc: "100", icon: <FaClipboardList />, id: "product" },
+        { title: "Total Orders", desc: "43", icon: <FaFirstOrder />, id: "order" },
+        { title: "Add Product", icon: <MdProductionQuantityLimits />, id: "addproduct" },
+    ];
+    const handleItemClick = (id) => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+
+
+    return (
+        <>
+            <div className='container-fluid'>
+                <div className='row mt-5 mb-2'>
+                    <div className='col-lg-12 col-sm-12'>
+                        <div className='search-div'>
+                            <input
+                                type="search"
+                                placeholder='Search Anything'
+
+                            />
+                            <div className='search-icon'>
+                                <FaSearch />
+                            </div>
+                            <div className='logout' onClick={() => {
+                                move("/")
+                            }}>
+                                <FaPowerOff />
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                  <p>Total Users</p>
-                  <p>150</p>
+                <div className='row pt-2 pb-5 px-3' style={{ backgroundColor: "rgb(2, 2, 94)", color: "white", borderRadius: "20px" }}>
+                    <div className='col-lg-12 col-sm-12 py-4'>
+                        <h1>Dashboard</h1>
+                    </div>
+                    {data.map((item) => {
+                        return (
+                            <div className='col-lg-4 col-sm-5 p-3' key={item.title} onClick={() => handleItemClick(item.id)}>
+                                <div className='dash_card'>
+                                    {item.title === "New Order" && (
+                                        <div>
+                                            <p className='color_card'>4+</p>
+                                        </div>
+                                    )}
+                                    <div className='dash_icon' style={{ fontSize: "80px" }}>
+                                        {item.icon}
+                                    </div>
+                                    <div className='dash_detail' style={{ fontSize: "30px" }}>
+                                        <div>
+                                            <p style={{ fontWeight: "600" }}>{item.title}</p>
+                                        </div>
+                                        <div className='d-flex justify-content-end px-3'>
+                                            <p style={{ fontWeight: "600" }}>{item.desc}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+
                 </div>
-              </div>
+
+                <div className='col-lg-12 col-sm-12' id='newOrder'>
+                    <div className='row px-5 my-5 d-flex gap-5 justify-content-center'>
+                        <NewOrder />
+                    </div>
+                </div>
+                <div className='col-lg-12 col-sm-12' id='order'>
+                    <div className='row px-5 my-5 d-flex gap-5 justify-content-center'>
+                        <Orders />
+                    </div>
+                </div>
+
+                <div className='col-lg-12 col-sm-12' id='users'>
+                    <div className='row px-5 my-5 d-flex gap-5 justify-content-center'>
+                        <Users />
+                    </div>
+                </div>
+
+                <div className='col-lg-12 col-sm-12' id='product'>
+                    <div className='row px-5 my-5 d-flex gap-5 justify-content-center'>
+                        <Products />
+                    </div>
+                </div>
+
+                <div className='col-lg-12 col-sm-12' id='addproduct'>
+                    <div className='row px-5 my-5 d-flex gap-5 justify-content-center'>
+                        <AddProduct />
+                    </div>
+                </div>
+
             </div>
-
-      
-            
-            <div
-              className="col-lg-3 col-md-5 col-sm-12 mb-4 dash_card"
-              onClick={() => handleClick('courses')}
-            >
-              <div className='dash_card_box'>
-                <div className="dash_card_icon">
-                  <FaDiscourse />
-                </div>
-                <div>
-                  <p>Products</p>
-                  <p>50</p>
-                </div>
-              </div>
-            </div>
-      
-
-
-          </div>
-        </div>
-   
-        <div className="row">
-          <div className="col-lg-12 col-sm-12">{renderComponent()}</div>
-        </div>
-      </div >
-
-    </>
-  );
+        </>
+    );
 };

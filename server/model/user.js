@@ -4,7 +4,6 @@ let userSchema= mongoose.Schema({
     name: String,
     email: {
         type:String,
-        required:true,
         unique:true,
     },
     password:String,
@@ -12,7 +11,6 @@ let userSchema= mongoose.Schema({
     country:String,
     city:String,
     number:Number,
-    // trim:true,
     date:{
         type:Date,
         default:Date.now,

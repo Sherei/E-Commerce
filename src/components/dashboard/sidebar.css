@@ -9,13 +9,15 @@
 }
 
 .sidebar {
-    background-color: #2b2c6c;
+    background-color: rgb(2, 2, 94);
     /* background: #000; */
     color: #fff;
     height: auto;
     width: 200px;
+    min-height: 100vh;
     /* border: 1px solid yellow; */
     transition: all 0.5s;
+    overflow: hidden;
 }
 
 .top_section {
@@ -25,13 +27,45 @@
 }
 
 .logo {
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .bars {
     display: flex;
     font-size: 25px;
     margin-left: 50px;
+}
+
+.link {
+    display: flex;
+    color: #fff;
+    padding: 10px 15px;
+    gap: 15px;
+    transition: all 0.5s;
+    /* border: 1px solid red; */
+}
+
+.link:hover {
+    border-bottom: 1px solid rgb(99, 99, 99);
+    color: white;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.active {
+    border-bottom: 1px solid rgb(99, 99, 99);
+    color: white;
+    transform: scale(1.05);
+}
+.icon{
+    font-size: 25px;
+}
+.link{
+    display: flex;
+    align-items: center;
+}
+.link_text {
+    font-size: 18px;
 }
 
 .extra {

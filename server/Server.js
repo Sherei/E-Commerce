@@ -6,17 +6,35 @@ let app = myExpress();
 app.use(myExpress.json())
 
 app.listen(3010, function () {
-
     console.log("server live ho gya")
-
 })
-let token = require('jsonwebtoken');
+
+let multer = require('multer')
+let fs = require('fs')
+
+const productPics = multer.diskStorage({
+    destination: function (req, file, cb) {
+        let path = './server/pics/';
+
+        fs.mkdir(path, function () {
+            cb(null, path);
+        });
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+const productUpload = multer({ storage: productPics });
 
 require("./model/db")
 
 let SignupUsers = require('./model/user')
 
 let Product = require('./model/product')
+
+let token = require('jsonwebtoken');
+
 
 app.post('/session-check', async (req, res) => {
 
@@ -75,25 +93,32 @@ app.post('/login', async (req, res) => {
 })
 
 
-app.post("/product", async (req, res) => {
+app.post("/product", productUpload.single("pic"), async (req, res) => {
     try {
+        req.body.pic = "/" + req.file.originalname
+
+        console.log(req.body)
+        console.log(req.files)
+        
         let newProduct = new Product(req.body)
 
         await newProduct.save()
+
         res.send("Added")
+
     } catch (e) {
         console.log(e)
     }
 })
 
-app.get('/product', async(req,res)=>{
+app.get('/product', async (req, res) => {
 
-    try{
-        
-        let newProduct= await Product.find()
+    try {
+
+        let newProduct = await Product.find()
         res.json(newProduct)
 
-    }catch(e){
+    } catch (e) {
         console.log(e)
 
     }
