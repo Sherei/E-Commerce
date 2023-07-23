@@ -95,19 +95,26 @@ app.post('/login', async (req, res) => {
 
 app.post("/product", productUpload.single("pic"), async (req, res) => {
     try {
-        req.body.pic = "/" + req.file.originalname
+        req.body.pic = req.file.originalname
 
-        console.log(req.body)
-        console.log(req.files)
+        let existingProduct = await Product.findOne({ sn: req.body.sn });
         
-        let newProduct = new Product(req.body)
+        if (existingProduct) {
+            return res.status(400).send("Try with different Serial Number");
+        }else if (!existingProduct) {
+         
+            let newProduct = new Product(req.body)
 
-        await newProduct.save()
+            await newProduct.save()
 
-        res.send("Added")
+            res.send("Product Added");
+
+        }
+
 
     } catch (e) {
         console.log(e)
+        res.status(500).send("Internal Server Error");
     }
 })
 
@@ -115,7 +122,7 @@ app.get('/product', async (req, res) => {
 
     try {
 
-        let newProduct = await Product.find()
+        let newProduct = await Product.find().sort({ _id: -1 })
         res.json(newProduct)
 
     } catch (e) {
@@ -123,3 +130,7 @@ app.get('/product', async (req, res) => {
 
     }
 })
+
+
+// app.use(myExpress.static('./server/build'))
+app.use(myExpress.static('./server/pics'))

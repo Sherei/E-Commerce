@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import "./addproduct.css"
 import axios from 'axios';
 import { toast } from 'react-toastify';
+
 export const AddProduct = () => {
 
   const [selectedCategory, setSelectedCategory] = useState('');
@@ -12,14 +13,15 @@ export const AddProduct = () => {
   const handleCategoryChange = (event) => {
     setSelectedCategory(event.target.value);
   };
+
   const handleColorChange = (event) => {
     const selectedOptions = Array.from(event.target.selectedOptions, (option) => option.value);
     setSelectedColors(selectedOptions);
   };
 
-  let move = useNavigate()
+  let move = useNavigate();
 
-  let { register, handleSubmit, reset, formState: { errors }, } = useForm()
+  let { register, handleSubmit, reset, formState: { errors } } = useForm();
   const [imagePreviews, setImagePreviews] = useState([]);
 
   const handleImageChange = (event) => {
@@ -38,37 +40,39 @@ export const AddProduct = () => {
     }
   };
 
-
-  function AddProduct(data) {
+  async function submitProduct(data) {
     console.log(data);
     let meraForm = new FormData();
     meraForm.append('title', data.title);
     meraForm.append('sn', data.sn);
     meraForm.append('category', data.category);
     meraForm.append('subCategory', data.subCategory);
-    meraForm.append('color', data.color);
+    meraForm.append('color1', data.color1);
+    meraForm.append('color2', data.color2);
+    meraForm.append('color3', data.color3);
+    meraForm.append('color4', data.color4);
+    meraForm.append('color5', data.color5);
     meraForm.append('inStock', data.inStock);
     meraForm.append('city', data.city);
     meraForm.append('description', data.description);
     meraForm.append('price', data.price);
+    meraForm.append('pic', data.pic[0]);
+    try {
+      let response = await axios.post("/product", meraForm)
 
-    for (let i = 0; i < data.pic.length; i++) {
-      meraForm.append("pic", data.pic[i], data.pic[i].name);
-    }
-
-    axios.post("/product", meraForm).then((res) => {
-      try {
-        if (res) {
-          toast.success("Product Uploaded");
-        }
-      } catch (e) {
-        console.log(e)
-        // toast.error("Try Again");
+      if (response.data === "Product Added") {
+        toast.success("Product Uploaded");
       }
-    });
-  }
+    } catch (error) {
 
+      if (error.response && error.response.status === 400) {
+        toast.warning("Try with different Serial number");
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
 
+    }
+  };
 
   return (
     <div className='container my-4'>
@@ -85,9 +89,8 @@ export const AddProduct = () => {
               </div>
               <div className='col-lg-6 col-sm-12  my-2'>
                 <label style={{ fontSize: "17px", fontWeight: "600" }}>Serial Number *</label>
-                <input type="number" {...register('sn', { required: true, minLength: 3 })} min={"0"} className="form-control mb-2 mr-sm-2" placeholder="1234" />
+                <input type="number" {...register('sn', { required: true })} min={"1"} className="form-control mb-2 mr-sm-2" placeholder="1234" />
                 {errors.sn && errors.sn.type == "required" ? <div className='error'>Serail Number is required</div> : null}
-                {errors.sn && errors.sn.type == "minLength" ? <div className='error'>Serial Number Contain at least 3 numbers</div> : null}
               </div>
             </div>
             <div className='row'>
@@ -259,13 +262,13 @@ export const AddProduct = () => {
 
               <div className='col-lg-6 col-sm-12  my-2'>
                 <label style={{ fontSize: "17px", fontWeight: "600" }}>Price *</label>
-                <input type="number" {...register('price', { required: true, minLength: 3 })} min={"0"} className="form-control mb-2 mr-sm-2" placeholder="1234" />
+                <input type="number" {...register('price', { required: true, minLength: 3 })} min={"1"} className="form-control mb-2 mr-sm-2" placeholder="1234" />
                 {errors.price && errors.price.type == "required" ? <div className='error'>Price is required</div> : null}
                 {errors.price && errors.price.type == "minLength" ? <div className='error'>Price Contain at least 3 numbers</div> : null}
               </div>
 
               <div className='col-lg-6 col-sm-12  my-2 '>
-                <label style={{ fontSize: "17px", fontWeight: "600" }}>Choose A Pic *</label>
+                <label style={{ fontSize: "17px", fontWeight: "600" }}>Product Pic *</label>
                 <input type='file' {...register('pic', { required: true })} onChange={handleImageChange} className="form-control mb-2 mr-sm-2" placeholder="12" />
                 {errors.pic && errors.pic.type == "required" ? <div className='error'>Pic is required</div> : null}
                 {errors.pic && errors.pic.type == "minLength" ? <div className='error'>Select Atleast 2 Pictures</div> : null}
@@ -278,9 +281,8 @@ export const AddProduct = () => {
                 </div>
               </div>
             </div>
-
             <div className='col-lg-12 col-sm-12 my-5'>
-              <button type="button" className="btn btn-primary" onClick={handleSubmit(AddProduct)}>
+              <button type="button" className="btn btn-primary" onClick={handleSubmit(submitProduct)}>
                 Submit
               </button>
             </div>

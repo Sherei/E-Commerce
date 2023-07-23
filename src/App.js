@@ -8,7 +8,8 @@ import { Products } from "./components/Products/Products";
 import { Error } from "./components/Error/Error";
 import { Login } from "./components/login/Login";
 import { Signup } from "./components/signup/Signup";
-import Sidebar from "./components/Dashboard/Sidebar"
+import Sidebar from "./components/Dashboard/Sidebar";
+import {Singlepage} from "./components/singlePage/Singlepage"
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -53,6 +54,7 @@ function App() {
           <Route exact path="/login" element={<Login />}></Route>
           <Route exact path="/signup" element={<Signup />}></Route>
           <Route exact path="/dashboard" element={<Sidebar />}></Route>
+          <Route exact path="/single" element={<Singlepage />}></Route>
         </Routes>
       </main>
       {cu.email != "asd@gmail.com" &&

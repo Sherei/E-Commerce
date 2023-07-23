@@ -1,6 +1,7 @@
 let mongoose = require("mongoose");
 
 let productSchema = mongoose.Schema({
+    pic:String,
     title: {
         type: String,
         trim: true,
@@ -53,9 +54,6 @@ let productSchema = mongoose.Schema({
     inStock: {
         type: Number,
         trim: true,
-    },
-    pic: {
-        type: String,
     },
     date: {
         type: Date,
